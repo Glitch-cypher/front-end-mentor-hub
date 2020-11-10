@@ -3,7 +3,7 @@ import React from "react";
 
 import IndividualChallenge from "../IndividualWeekComponent";
 
-function MainSection({setWeek}) {
+function MainSection({ currentWeek }) {
   let dataArray = [
     {
       id: 1,
@@ -12,14 +12,16 @@ function MainSection({setWeek}) {
       challenge: "The challenge is assigning varibles and",
     },
     {
-      id:2,
+      id: 2,
       title: "Week 2 - Advanced JS",
       description: "This week we will learn advanced js",
       challenge: "The challenge is assigning array methods ..",
     },
   ];
 
-  return dataArray.map((item) => <IndividualChallenge item={item} setWeek = {setWeek}/>);
+  return dataArray.map((item) => (
+    <IndividualChallenge item={item} currentWeek={currentWeek} />
+  ));
 }
 
 export default MainSection;

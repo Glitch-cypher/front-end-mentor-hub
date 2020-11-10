@@ -1,15 +1,19 @@
 import "./main.css";
 import React, { useState } from "react";
 import Sidebar from "../SidebarComponent";
-import MainSection from "../MainSectionComponent/index"
+import MainSection from "../MainSectionComponent/index";
 
 function ChallengePage() {
-  const [week, setWeek] = useState(null)
+  const [week, setWeek] = useState(null);
+
+  function currentWeek(week) {
+    setWeek(week);
+  }
 
   return (
     <div className="main-content">
       <div className="weeks">
-      <MainSection setWeek = {setWeek}/>
+        <MainSection currentWeek={currentWeek} />
       </div>
       <div className="side-bar">
         <Sidebar week={week} className="side" />

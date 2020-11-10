@@ -2,7 +2,7 @@ import "./main.css";
 import { useState } from "react";
 import Collapsible from "react-collapsible";
 
-function IndividualChallenge({ item, setWeek }) {
+function IndividualChallenge({ item, currentWeek }) {
   const [input, setInput] = useState("");
   const [link, setLink] = useState([]);
 
@@ -16,7 +16,11 @@ function IndividualChallenge({ item, setWeek }) {
 
   return (
     <div>
-      <Collapsible trigger={item.title} className="Header" onOpen = {setWeek(item.id)}>
+      <Collapsible
+        trigger={item.title}
+        className="Header"
+        onOpen={() => currentWeek(item.id)}
+      >
         <section className="content">
           <p>{item.description}</p>
           <p>{item.challenge}</p>
@@ -30,7 +34,7 @@ function IndividualChallenge({ item, setWeek }) {
                 addInput(e.target.value);
               }}
               onKeyPress={(e) => {
-                if ((e.key === "Enter")) {
+                if (e.key === "Enter") {
                   addLink(input);
                   setInput((e.target.value = ""));
                 }
