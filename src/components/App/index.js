@@ -6,8 +6,8 @@ function App() {
   return (
     <Router>
       <div className="app">
-        <nav className="navBar">
-          <h1>SOC: Mentor Hub</h1>
+        <nav className="nav-bar">
+          <h1 className="page-title">SOC: Mentor Hub</h1>
           <Link to="/challengepage">Challenges</Link>
         </nav>
         <Switch>

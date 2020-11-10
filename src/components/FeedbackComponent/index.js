@@ -4,9 +4,9 @@ import React from "react";
 function Feedback({ object }) {
   console.log(object);
   return (
-    <div>
-      <h6>{object.dateAdded}</h6>
-      <p>{object.comment}</p>
+    <div className="comment-container">
+      <h6 className="date">{object.dateAdded}</h6>
+      <p className="comment">{object.comment}</p>
     </div>
   );
 }

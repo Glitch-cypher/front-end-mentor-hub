@@ -4,11 +4,11 @@ import Sidebar from "../SidebarComponent";
 
 function ChallengePage() {
   return (
-    <div>
-      <div className = "main">
-        <p>Main</p>
+    <div className="main-content">
+      <div className="weeks">Main</div>
+      <div className="side-bar">
+        <Sidebar week={1} className="side" />
       </div>
-      <Sidebar week={1} className = "side" />
     </div>
   );
 }
