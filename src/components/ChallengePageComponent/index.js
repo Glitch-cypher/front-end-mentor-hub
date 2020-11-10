@@ -3,7 +3,14 @@ import React, { useState } from "react";
 import Sidebar from "../SidebarComponent";
 
 function ChallengePage() {
-  return <Sidebar week={1} />;
+  return (
+    <div>
+      <div className = "main">
+        <p>Main</p>
+      </div>
+      <Sidebar week={1} className = "side" />
+    </div>
+  );
 }
 
 export default ChallengePage;
