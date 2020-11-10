@@ -2,7 +2,7 @@ import "./main.css";
 import { useState } from "react";
 import Collapsible from "react-collapsible";
 
-function IndividualChallenge({ item }) {
+function IndividualChallenge({ item, setWeek }) {
   const [input, setInput] = useState("");
   const [link, setLink] = useState([]);
 
@@ -16,7 +16,7 @@ function IndividualChallenge({ item }) {
 
   return (
     <div>
-      <Collapsible trigger={item.title} className="Header">
+      <Collapsible trigger={item.title} className="Header" onOpen = {setWeek(item.id)}>
         <section className="content">
           <p>{item.description}</p>
           <p>{item.challenge}</p>
