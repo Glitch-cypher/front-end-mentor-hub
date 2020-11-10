@@ -2,7 +2,7 @@ import "./main.css";
 import React, { useState } from "react";
 import Feedback from "../FeedbackComponent";
 
-function Sidebar(week) {
+function Sidebar({ week }) {
   const [feedback, setFeedback] = useState([]);
   const [input, setInput] = useState();
   const [key, setKey] = useState(0);
@@ -31,7 +31,9 @@ function Sidebar(week) {
   return (
     <div>
       {feedback.map((object) => {
-        return <Feedback key={object.key} object={object} />;
+        if (object.week === week) {
+          return <Feedback key={object.key} object={object} />;
+        }
       })}
       <input
         className="input"
