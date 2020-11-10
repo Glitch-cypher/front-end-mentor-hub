@@ -1,7 +1,9 @@
 import "./main.css";
-import React from "react";
+import React, {useState} from "react";
 
 import IndividualChallenge from "../IndividualWeekComponent";
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
 
 function MainSection({ currentWeek }) {
   let dataArray = [
@@ -17,10 +19,24 @@ function MainSection({ currentWeek }) {
       description: "This week we will learn advanced js",
       challenge: "The challenge is assigning array methods ..",
     },
+    {
+      id: 3,
+      title: "Week 3 - Node and Express",
+      description: "This week we will learn node",
+      challenge: "The challenge is node",
+    }
   ];
 
-  return dataArray.map((item) => (
-    <IndividualChallenge item={item} currentWeek={currentWeek} />
+  const [isOpen, setIsOpen] = useState(new Array(dataArray.length).fill(false))
+
+  function makeOpen (index) {
+    let newArray = new Array(dataArray.length).fill(false)
+    console.log(newArray)
+    setIsOpen([...newArray(0, index), true, ...newArray(index+1)])
+  }
+
+  return dataArray.map((item, index) => (
+    <IndividualChallenge item={item} currentWeek={currentWeek} isOpen = {isOpen[index]} index = {index} makeOpen = {makeOpen}/>
   ));
 }
 

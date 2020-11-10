@@ -1,10 +1,13 @@
 import "./main.css";
 import { useState } from "react";
 import Collapsible from "react-collapsible";
+import Accordion from 'react-bootstrap/Accordion';
+import Card from 'react-bootstrap/Card';
 
-function IndividualChallenge({ item, currentWeek }) {
+function IndividualChallenge({ item, currentWeek, isOpen, index, makeOpen }) {
   const [input, setInput] = useState("");
   const [link, setLink] = useState([]);
+  
 
   function addInput(text) {
     setInput(text);
@@ -19,7 +22,8 @@ function IndividualChallenge({ item, currentWeek }) {
       <Collapsible
         trigger={item.title}
         className="Header"
-        onOpen={() => currentWeek(item.id)}
+        onOpen={() => {currentWeek(item.id); makeOpen(index)}}
+        open = {isOpen}
       >
         <section className="content">
           <p>{item.description}</p>
