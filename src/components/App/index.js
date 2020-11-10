@@ -1,10 +1,12 @@
 import "./App.css";
+import ChallengePage from "../ChallengePageComponent";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
         <p>Happy Project Week</p>
+        <ChallengePage />
         <a
           className="App-link"
           href="https://reactjs.org"
