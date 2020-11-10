@@ -1,2 +1,44 @@
-import "./main.css"
-import React, {useState} from "react"
+import "./main.css";
+import { useState } from "react";
+import Collapsible from "react-collapsible";
+
+function IndividualChallenge({ item }) {
+  const [input, setInput] = useState("");
+  const [link, setLink] = useState([]);
+
+  function addInput(text) {
+    setInput(text);
+  }
+
+  function addLink() {
+    setLink([...link, input]);
+  }
+
+  return (
+    <div>
+      <Collapsible trigger={item.title} className="Header">
+        <section className="content">
+          <p>{item.description}</p>
+          <p>{item.challenge}</p>
+          <div>
+            {link.map((item) => {
+              return <p>{item}</p>;
+            })}
+            <input
+              placeholder="Add all links to this week"
+              onChange={(e) => {
+                addInput(e.target.value);
+              }}
+              onKeyPress={(e) => {
+                if ((e.key = "Enter")) {
+                  addLink(input);
+                }
+              }}
+            />
+          </div>
+        </section>
+      </Collapsible>
+    </div>
+  );
+}
+export default IndividualChallenge;
