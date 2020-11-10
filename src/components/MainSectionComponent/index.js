@@ -1,6 +1,6 @@
 import "./main.css";
-import React, { useState, useEffect } from "react";
-import Collapsible from "react-collapsible";
+import React from "react";
+
 import IndividualChallenge from "../IndividualWeekComponent";
 
 function MainSection() {

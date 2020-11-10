@@ -30,8 +30,9 @@ function IndividualChallenge({ item }) {
                 addInput(e.target.value);
               }}
               onKeyPress={(e) => {
-                if ((e.key = "Enter")) {
+                if ((e.key === "Enter")) {
                   addLink(input);
+                  setInput((e.target.value = ""));
                 }
               }}
             />
