@@ -34,9 +34,12 @@ function Sidebar(week) {
         return <Feedback key={object.key} object={object} />;
       })}
       <input
+        className="input"
+        placeholder="leave a comment.."
         onKeyPress={(e) => {
           if (e.key === "Enter") {
             addFeedback(input, week, new Date().toGMTString());
+            setInput((e.target.value = ""));
           }
         }}
         onChange={(e) => {
