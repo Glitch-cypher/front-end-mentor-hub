@@ -6,10 +6,15 @@ import styles from "./accordian.module.css";
 
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
-  let [activeItem, setActiveItem] = React.useState(4);
+  const [activeItem, setActiveItem] = React.useState(4);
+  const [key, setKey] = useState(0);
 
+  function addKey() {
+    setKey(key + 1);
+    return key;
+  }
   function addLink(e) {
-    setLink([...link, { text: e.target.value, week: week }]);
+    setLink([...link, { text: e.target.value, week: week, key: addKey() }]);
   }
 
   function AccordianTitle({ children, onClick }) {
@@ -27,21 +32,26 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
 
         {link.map((object) => {
           if (object.week === week) {
-            return <a href={`https://${object.text}`}>{object.text}</a>;
+            return (
+              <div key={object.key}>
+                <a href={`https://${object.text}`}>{object.text}</a>
+              </div>
+            );
           }
           return null;
         })}
-
-        <input
-          placeholder="Add all links to this week"
-          onKeyPress={(e) => {
-            if (e.key === "Enter") {
-              addLink(e);
-              e.target.value = "";
-              console.log(link);
-            }
-          }}
-        />
+        <div>
+          <input
+            placeholder="Add all links to this week"
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                addLink(e);
+                e.target.value = "";
+                console.log(link);
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }
@@ -67,42 +77,6 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
           </div>
         );
       })}
-      {/* <AccordianTitle
-        onClick={() => {
-          currentWeek(1);
-          setActiveItem(1);
-        }}
-      >
-        Week One
-      </AccordianTitle>
-      <AccordianBody show={activeItem === 1}>{accordianContent}</AccordianBody>
-      <AccordianTitle
-        onClick={() => {
-          currentWeek(2);
-          setActiveItem(2);
-        }}
-      >
-        Week Two
-      </AccordianTitle>
-      <AccordianBody show={activeItem === 2}>{accordianContent}</AccordianBody>
-      <AccordianTitle
-        onClick={() => {
-          currentWeek(3);
-          setActiveItem(3);
-        }}
-      >
-        Week Three
-      </AccordianTitle>
-      <AccordianBody show={activeItem === 3}>{accordianContent}</AccordianBody>
-      <AccordianTitle
-        onClick={() => {
-          currentWeek(4);
-          setActiveItem(4);
-        }}
-      >
-        Week Four
-      </AccordianTitle>
-      <AccordianBody show={activeItem === 4}>{accordianContent}</AccordianBody> */}
     </div>
   );
 }
