@@ -7,6 +7,35 @@ function Sidebar({ week }) {
   const [input, setInput] = useState();
   const [key, setKey] = useState(0);
 
+  useEffect(() => {
+    async function getFeedback() {
+      let response = await fetch(`http://localhost:5000/feedback/${week}`);
+      let data = await response.json();
+      setFeedback(data);
+    }
+    getFeedback();
+  }, [week]);
+
+  useEffect(() => {
+    async function postFeedback() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedback[feedback.length]),
+      };
+      const response = await fetch(
+        "http://localhost:5000/feedback/",
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    if (feedback != []) {
+      postFeedback();
+    }
+  }, [feedback]);
+
   function addKey() {
     setKey(key + 1);
     return key;
@@ -28,11 +57,19 @@ function Sidebar({ week }) {
     setInput(text);
   }
 
+  function editComment(){
+
+  }
+
+  function deleteComment(index){
+    setFeedback([...feedback.slice(0,index),...feedback.slice(index+1)])
+  }
+
   return (
     <div>
       {feedback.map((object) => {
         if (object.week === week) {
-          return <Feedback key={object.key} object={object} />;
+          return <Feedback key={object.key} object={object} editComment={editComment} deleteComment = {deleteComment}/>;
         }
       })}
       <input

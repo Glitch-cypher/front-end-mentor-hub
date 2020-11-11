@@ -1,5 +1,5 @@
 import "./main.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import cs from "classnames";
 import styles from "./accordian.module.css";
@@ -8,6 +8,35 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
   const [activeItem, setActiveItem] = React.useState(4);
   const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    async function getLink() {
+      let response = await fetch(`http://localhost:5000/link/${week}`);
+      let data = await response.json();
+      setLink(data);
+    }
+    getLink();
+  }, [week]);
+
+  useEffect(() => {
+    async function postLink() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(link[link.length]),
+      };
+      const response = await fetch(
+        "http://localhost:5000/link/",
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    if (link != []) {
+      postLink();
+    }
+  }, [link]);
 
   function addKey() {
     setKey(key + 1);
