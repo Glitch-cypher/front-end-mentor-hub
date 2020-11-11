@@ -13,7 +13,7 @@ function ChallengePage() {
   return (
     <div className="main-content">
       <div className="weeks">
-        <MainSection currentWeek={currentWeek} />
+        <MainSection currentWeek={currentWeek} week={week} />
       </div>
       <div className="side-bar">
         <Sidebar week={week} className="side" />
