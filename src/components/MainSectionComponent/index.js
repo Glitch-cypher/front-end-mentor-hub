@@ -1,11 +1,9 @@
 import "./main.css";
-import React, { useState } from "react";
+import React from "react";
 
 import IndividualChallenge from "../IndividualWeekComponent";
-import Accordion from "react-bootstrap/Accordion";
-import Card from "react-bootstrap/Card";
 
-function MainSection() {
+function MainSection({ currentWeek, week }) {
   let dataArray = [
     {
       id: 1,
@@ -27,15 +25,13 @@ function MainSection() {
     },
   ];
 
-  const [isOpen, setIsOpen] = useState(new Array(dataArray.length).fill(false));
-
-  function makeOpen(index) {
-    let newArray = new Array(dataArray.length).fill(false);
-    console.log(newArray);
-    setIsOpen([...newArray(0, index), true, ...newArray(index + 1)]);
-  }
-
-  return <IndividualChallenge />;
+  return (
+    <IndividualChallenge
+      week={week}
+      dataArray={dataArray}
+      currentWeek={currentWeek}
+    />
+  );
 }
 
 export default MainSection;
