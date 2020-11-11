@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import cs from "classnames";
 import styles from "./accordian.module.css";
+import Link from "../Link/";
 
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
@@ -10,6 +11,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [key, setKey] = useState(0);
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
+  const [addedId, setAddedId] = useState(true);
 
   useEffect(() => {
     async function getLink() {
@@ -35,10 +37,10 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const data = await response.json();
       console.log(data);
     }
-    if (link != []) {
+    if (link !== []) {
       postLink();
     }
-  }, [link]);
+  }, [addedId]);
 
   useEffect(() => {
     async function deleteLink() {
@@ -53,7 +55,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const data = await response.json();
       console.log(data);
     }
-    if (link != []) {
+    if (deleteId !== []) {
       deleteLink();
     }
   }, [deleteId]);
@@ -73,7 +75,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const data = await response.json();
       console.log(data);
     }
-    if (link != []) {
+    if (editId !== []) {
       updateLink();
     }
   }, [editId]);
@@ -93,6 +95,16 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       </button>
     );
   }
+  function editLink(key, text) {
+    let index = link.findIndex((object) => object.key === key);
+    link[index].text = text;
+    setLink([...link]);
+  }
+
+  function deleteLink(key) {
+    let index = link.findIndex((object) => object.key === key);
+    setLink([...link.slice(0, index), ...link.slice(index + 1)]);
+  }
 
   function AccordianBody({ children, show }) {
     return (
@@ -102,9 +114,14 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
         {link.map((object) => {
           if (object.week === week) {
             return (
-              <div key={object.key}>
-                <a href={`https://${object.text}`}>{object.text}</a>
-              </div>
+              <Link
+                key={object.key}
+                object={object}
+                deleteLink={deleteLink}
+                setDeleteId={setDeleteId}
+                setEditId={setEditId}
+                editLink={editLink}
+              />
             );
           }
           return null;
@@ -116,7 +133,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
               if (e.key === "Enter") {
                 addLink(e);
                 e.target.value = "";
-                console.log(link);
+                setAddedId(!addedId);
               }
             }}
           />

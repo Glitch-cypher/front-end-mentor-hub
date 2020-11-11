@@ -1,22 +1,12 @@
 import "./main.css";
 import React, { useState } from "react";
 
-function Feedback({
-  object,
-  editComment,
-  deleteComment,
-  setEditId,
-  setDeleteId,
-  setAddedId,
-  addedId,
-}) {
-  console.log(object);
+function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
-  const [text, setText] = useState(object.comment);
+  const [text, setText] = useState(object.text);
   return (
-    <div className="comment-container">
-      <h6 className="date">{object.dateAdded}</h6>
-      {!editing ? <p className="comment">{object.comment}</p> : null}
+    <div>
+      {!editing ? <a href={`https://${object.text}`}>{object.text}</a> : null}
       {editing ? (
         <input
           value={text}
@@ -24,10 +14,9 @@ function Feedback({
           visibility={editing}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              editComment(object.key, e.target.value);
+              editLink(object.key, e.target.value);
               setEditing(false);
               setEditId(object.key);
-              setAddedId(!addedId);
             }
           }}
         />
@@ -44,7 +33,7 @@ function Feedback({
       ) : null}
       <button
         onClick={() => {
-          deleteComment(object.key);
+          deleteLink(object.key);
           setDeleteId(object.key);
         }}
       >
@@ -53,4 +42,4 @@ function Feedback({
     </div>
   );
 }
-export default Feedback;
+export default Link;

@@ -8,6 +8,7 @@ function Sidebar({ week }) {
   const [key, setKey] = useState(0);
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
+  const [addedId, setAddedId] = useState(true);
 
   useEffect(() => {
     async function getFeedback() {
@@ -33,10 +34,10 @@ function Sidebar({ week }) {
       const data = await response.json();
       console.log(data);
     }
-    if (feedback != []) {
+    if (feedback !== []) {
       postFeedback();
     }
-  }, [feedback]);
+  }, [addedId]);
 
   useEffect(() => {
     async function deleteFeedback() {
@@ -51,7 +52,7 @@ function Sidebar({ week }) {
       const data = await response.json();
       console.log(data);
     }
-    if (feedback != []) {
+    if (feedback !== []) {
       deleteFeedback();
     }
   }, [deleteId]);
@@ -71,7 +72,7 @@ function Sidebar({ week }) {
       const data = await response.json();
       console.log(data);
     }
-    if (feedback != []) {
+    if (feedback !== []) {
       updateFeedback();
     }
   }, [editId]);
@@ -114,13 +115,18 @@ function Sidebar({ week }) {
         if (object.week === week) {
           return (
             <Feedback
+              setDeleteId={setDeleteId}
+              setEditId={setEditId}
               key={object.key}
               object={object}
               editComment={editComment}
               deleteComment={deleteComment}
+              setAddedId={setAddedId}
+              addedId={addedId}
             />
           );
         }
+        return null;
       })}
       <input
         className="input"
