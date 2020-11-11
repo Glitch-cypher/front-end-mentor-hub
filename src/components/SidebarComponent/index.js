@@ -6,6 +6,8 @@ function Sidebar({ week }) {
   const [feedback, setFeedback] = useState([]);
   const [input, setInput] = useState();
   const [key, setKey] = useState(0);
+  const [deleteId, setDeleteId] = useState();
+  const [editId, setEditId] = useState();
 
   useEffect(() => {
     async function getFeedback() {
@@ -35,6 +37,44 @@ function Sidebar({ week }) {
       postFeedback();
     }
   }, [feedback]);
+
+  useEffect(() => {
+    async function deleteFeedback() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "DELETE",
+      };
+      const response = await fetch(
+        `http://localhost:5000/feedback/${deleteId}`,
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    if (feedback != []) {
+      deleteFeedback();
+    }
+  }, [deleteId]);
+
+  useEffect(() => {
+    async function updateFeedback() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedback[editId]),
+      };
+      const response = await fetch(
+        `http://localhost:5000/feedback/${editId}`,
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    if (feedback != []) {
+      updateFeedback();
+    }
+  }, [editId]);
 
   function addKey() {
     setKey(key + 1);

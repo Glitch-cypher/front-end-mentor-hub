@@ -8,6 +8,8 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
   const [activeItem, setActiveItem] = React.useState(4);
   const [key, setKey] = useState(0);
+  const [deleteId, setDeleteId] = useState();
+  const [editId, setEditId] = useState();
 
   useEffect(() => {
     async function getLink() {
@@ -37,6 +39,44 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       postLink();
     }
   }, [link]);
+
+  useEffect(() => {
+    async function deleteLink() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "DELETE",
+      };
+      const response = await fetch(
+        `http://localhost:5000/link/${deleteId}`,
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    if (link != []) {
+      deleteLink();
+    }
+  }, [deleteId]);
+
+  useEffect(() => {
+    async function updateLink() {
+      // POST request using fetch with async/await
+      const requestOptions = {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(link[editId]),
+      };
+      const response = await fetch(
+        `http://localhost:5000/link/${editId}`,
+        requestOptions
+      );
+      const data = await response.json();
+      console.log(data);
+    }
+    if (link != []) {
+      updateLink();
+    }
+  }, [editId]);
 
   function addKey() {
     setKey(key + 1);
