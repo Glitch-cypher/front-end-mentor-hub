@@ -1,5 +1,5 @@
 import "./main.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Feedback from "../FeedbackComponent";
 
 function Sidebar({ week }) {
@@ -57,19 +57,29 @@ function Sidebar({ week }) {
     setInput(text);
   }
 
-  function editComment(){
-
+  function editComment(key, comment) {
+    let index = feedback.findIndex((object) => object.key === key);
+    feedback[index].comment = comment;
+    setFeedback([...feedback]);
   }
 
-  function deleteComment(index){
-    setFeedback([...feedback.slice(0,index),...feedback.slice(index+1)])
+  function deleteComment(key) {
+    let index = feedback.findIndex((object) => object.key === key);
+    setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
   }
 
   return (
     <div>
       {feedback.map((object) => {
         if (object.week === week) {
-          return <Feedback key={object.key} object={object} editComment={editComment} deleteComment = {deleteComment}/>;
+          return (
+            <Feedback
+              key={object.key}
+              object={object}
+              editComment={editComment}
+              deleteComment={deleteComment}
+            />
+          );
         }
       })}
       <input
