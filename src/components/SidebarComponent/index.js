@@ -12,9 +12,12 @@ function Sidebar({ week }) {
 
   useEffect(() => {
     async function getFeedback() {
-      let response = await fetch(`http://localhost:5000/feedback/${week}`);
+      let response = await fetch(
+        `http://localhost:5000/feedback/?week=${week}`
+      );
       let data = await response.json();
-      setFeedback(data);
+      console.log(data.data);
+      setFeedback(data.data);
     }
     getFeedback();
   }, [week]);
@@ -25,7 +28,7 @@ function Sidebar({ week }) {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(feedback[feedback.length]),
+        body: JSON.stringify(feedback[feedback.length - 1]),
       };
       const response = await fetch(
         "http://localhost:5000/feedback/",
@@ -33,6 +36,7 @@ function Sidebar({ week }) {
       );
       const data = await response.json();
       console.log(data);
+      setFeedback(data.data);
     }
     if (feedback !== []) {
       postFeedback();
@@ -41,12 +45,12 @@ function Sidebar({ week }) {
 
   useEffect(() => {
     async function deleteFeedback() {
-      // POST request using fetch with async/await
+      // DELETE request using fetch with async/await
       const requestOptions = {
         method: "DELETE",
       };
       const response = await fetch(
-        `http://localhost:5000/feedback/${deleteId}`,
+        `http://localhost:5000/feedback/${id}`,
         requestOptions
       );
       const data = await response.json();
@@ -86,10 +90,9 @@ function Sidebar({ week }) {
     setFeedback([
       ...feedback,
       {
-        comment: input,
+        feedback: input,
         week: week,
-        key: addKey(),
-        dateAdded: dateAdded,
+        date: dateAdded,
       },
     ]);
   }
@@ -99,13 +102,13 @@ function Sidebar({ week }) {
   }
 
   function editComment(key, comment) {
-    let index = feedback.findIndex((object) => object.key === key);
-    feedback[index].comment = comment;
+    let index = feedback.findIndex((object) => object.id === key);
+    feedback[index].feedback = comment;
     setFeedback([...feedback]);
   }
 
   function deleteComment(key) {
-    let index = feedback.findIndex((object) => object.key === key);
+    let index = feedback.findIndex((object) => object.id === key);
     setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
   }
 
@@ -117,12 +120,12 @@ function Sidebar({ week }) {
             <Feedback
               setDeleteId={setDeleteId}
               setEditId={setEditId}
-              key={object.key}
+              key={object.id}
               object={object}
               editComment={editComment}
               deleteComment={deleteComment}
               setAddedId={setAddedId}
-              addedId={addedId}
+              // addedId={addedId}
             />
           );
         }
