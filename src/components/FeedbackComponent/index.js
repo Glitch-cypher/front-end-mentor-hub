@@ -7,8 +7,6 @@ function Feedback({
   deleteComment,
   setEditId,
   setDeleteId,
-  setAddedId,
-  addedId,
 }) {
   console.log(object);
   const [editing, setEditing] = useState(false);
@@ -27,7 +25,6 @@ function Feedback({
               editComment(object.key, e.target.value);
               setEditing(false);
               setEditId(object.key);
-              setAddedId(!addedId);
             }
           }}
         />

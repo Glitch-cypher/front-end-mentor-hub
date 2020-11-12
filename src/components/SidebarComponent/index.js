@@ -6,8 +6,8 @@ function Sidebar({ week }) {
   const [feedback, setFeedback] = useState([]);
   const [input, setInput] = useState();
   const [key, setKey] = useState(0);
-  const [deleteId, setDeleteId] = useState();
-  const [editId, setEditId] = useState();
+  const [deleteId, setDeleteId] = useState(true);
+  const [editId, setEditId] = useState(true);
   const [addedId, setAddedId] = useState(true);
 
   useEffect(() => {
@@ -135,6 +135,7 @@ function Sidebar({ week }) {
           if (e.key === "Enter") {
             addFeedback(input, week, new Date().toGMTString());
             setInput((e.target.value = ""));
+            setAddedId(!addedId);
           }
         }}
         onChange={(e) => {
