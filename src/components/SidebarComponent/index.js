@@ -5,9 +5,8 @@ import Feedback from "../FeedbackComponent";
 function Sidebar({ week }) {
   const [feedback, setFeedback] = useState([]);
   const [input, setInput] = useState();
-  const [key, setKey] = useState(0);
-  const [deleteId, setDeleteId] = useState(true);
-  const [editId, setEditId] = useState(true);
+  const [deleteId, setDeleteId] = useState();
+  const [editId, setEditId] = useState();
   const [addedId, setAddedId] = useState(true);
 
   useEffect(() => {
@@ -36,7 +35,10 @@ function Sidebar({ week }) {
       );
       const data = await response.json();
       console.log(data);
-      setFeedback(data.data);
+      // let week = data.data.filter((object)=> object.week === week)
+      // setFeedback(...week);
+      //Change backend to return the full database
+
     }
     if (feedback !== []) {
       postFeedback();
@@ -50,7 +52,7 @@ function Sidebar({ week }) {
         method: "DELETE",
       };
       const response = await fetch(
-        `http://localhost:5000/feedback/${id}`,
+        `http://localhost:5000/feedback/${deleteId}`,
         requestOptions
       );
       const data = await response.json();
@@ -68,6 +70,7 @@ function Sidebar({ week }) {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(feedback[editId]),
+        //look for return index property
       };
       const response = await fetch(
         `http://localhost:5000/feedback/${editId}`,
@@ -80,11 +83,6 @@ function Sidebar({ week }) {
       updateFeedback();
     }
   }, [editId]);
-
-  function addKey() {
-    setKey(key + 1);
-    return key;
-  }
 
   function addFeedback(input, week, dateAdded) {
     setFeedback([

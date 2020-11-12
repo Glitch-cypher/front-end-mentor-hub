@@ -46,6 +46,7 @@ function Feedback({
         onClick={() => {
           deleteComment(object.id);
           setDeleteId(object.id);
+
         }}
       >
         delete
