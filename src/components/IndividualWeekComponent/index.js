@@ -7,7 +7,7 @@ import Link from "../Link/";
 
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
-  const [activeItem, setActiveItem] = React.useState(4);
+  //const [activeItem, setActiveItem] = React.useState(currentWeek);
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
   const [addedId, setAddedId] = useState(true);
@@ -17,7 +17,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       let response = await fetch(`http://localhost:5000/link/?week=${week}`);
       let data = await response.json();
       setLink(data.data);
-      console.log(data.data)
+      console.log(data.data);
     }
     getLink();
   }, [week]);
@@ -28,7 +28,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[link.length -1]),
+        body: JSON.stringify(link[link.length - 1]),
       };
       const response = await fetch(
         "http://localhost:5000/link/",
@@ -67,9 +67,13 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const requestOptions = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[link.findIndex((obj) => {
-          return obj.id === editId;
-        })]),
+        body: JSON.stringify(
+          link[
+            link.findIndex((obj) => {
+              return obj.id === editId;
+            })
+          ]
+        ),
       };
       const response = await fetch(
         `http://localhost:5000/link/${editId}`,
@@ -83,7 +87,6 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     }
   }, [editId]);
 
-  
   function addLink(e, week) {
     setLink([...link, { projectLink: e.target.value, week: week }]);
   }
@@ -164,15 +167,12 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
             <AccordianTitle
               onClick={() => {
                 currentWeek(object.id);
-                setActiveItem(object.id);
               }}
             >
               {object.title}
             </AccordianTitle>
             <div>
-              <AccordianBody show={activeItem === object.id}>
-                {object}
-              </AccordianBody>
+              <AccordianBody show={week === object.id}>{object}</AccordianBody>
             </div>
           </div>
         );
