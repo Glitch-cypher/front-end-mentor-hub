@@ -30,6 +30,34 @@
 .title:hover {
   color: #ee6c4d;
 }
+.h2 {
+  color: #ee6c4d;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.48);
+}
+
+.p {
+  color: white;
+}
+
+.quote {
+  font-style: italic;
+  font-family: "Sriracha", cursive;
+}
+.quoteBox {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.challenge:link {
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+.challenge:hover {
+  text-decoration: underline;
+}
+.challenge:visited:active {
+  color: white;
+}
 
 .body {
   flex-grow: 1;
@@ -44,7 +72,7 @@
 
 .linkbox {
   background: grey;
-  padding: 3px;
+  padding: 8px;
   width: 400px;
   margin: 0 auto;
   position: relative;
@@ -53,6 +81,14 @@
   color: white;
   font-size: 14px;
   font-family: "Roboto", sans-serif;
+  max-height: 100px;
+  overflow: scroll;
+}
+.linkbox:empty {
+  background: #293241;
+  height: 0px;
+  padding: 0px;
+  margin: 0px;
 }
 
 .input {

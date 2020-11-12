@@ -5,8 +5,12 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.text);
   return (
-    <div>
-      {!editing ? <a href={`https://${object.text}`}>{object.text}</a> : null}
+    <div className="main-link-container">
+      {!editing ? (
+        <a className="link-style" href={`https://${object.text}`}>
+          {object.text}
+        </a>
+      ) : null}
       {editing ? (
         <input
           className="link-edit-input"
@@ -22,27 +26,28 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
           }}
         />
       ) : null}
-
-      {!editing ? (
+      <div className="buttons">
+        {!editing ? (
+          <button
+            className="link-edit-button"
+            onClick={() => {
+              setEditing(true);
+              console.log(editing);
+            }}
+          >
+            edit
+          </button>
+        ) : null}
         <button
-          className="link-edit-button"
+          className="link-delete-button"
           onClick={() => {
-            setEditing(true);
-            console.log(editing);
+            deleteLink(object.key);
+            setDeleteId(object.key);
           }}
         >
-          edit
+          delete
         </button>
-      ) : null}
-      <button
-        className="link-delete-button"
-        onClick={() => {
-          deleteLink(object.key);
-          setDeleteId(object.key);
-        }}
-      >
-        delete
-      </button>
+      </div>
     </div>
   );
 }

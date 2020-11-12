@@ -20,6 +20,8 @@
   width: 500px;
 }
 
-.challenge-page {
-  background: blue;
+.challenge-page-container {
+  position: relative;
+  max-height: 625px;
+  overflow: scroll;
 }

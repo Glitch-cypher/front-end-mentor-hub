@@ -108,10 +108,26 @@ function Sidebar({ week }) {
     let index = feedback.findIndex((object) => object.key === key);
     setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
   }
-
+  let reverse = feedback.reverse();
   return (
     <div>
-      {feedback.map((object) => {
+      <h2 className="feedback-title">Mentor Feedback - Week {week}</h2>
+      <input
+        className="input"
+        placeholder="leave a comment.."
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            addFeedback(input, week, new Date().toGMTString());
+            setInput((e.target.value = ""));
+            setAddedId(!addedId);
+          }
+        }}
+        onChange={(e) => {
+          addInput(e.target.value);
+        }}
+      />
+
+      {reverse.map((object) => {
         if (object.week === week) {
           return (
             <Feedback
@@ -128,20 +144,6 @@ function Sidebar({ week }) {
         }
         return null;
       })}
-      <input
-        className="input"
-        placeholder="leave a comment.."
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            addFeedback(input, week, new Date().toGMTString());
-            setInput((e.target.value = ""));
-            setAddedId(!addedId);
-          }
-        }}
-        onChange={(e) => {
-          addInput(e.target.value);
-        }}
-      />
     </div>
   );
 }
