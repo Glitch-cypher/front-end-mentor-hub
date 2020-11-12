@@ -3,4 +3,65 @@
   border-radius: 5px;
   padding: 5px;
   margin: 10px;
+  background: transparent;
+  background: rgba(255, 255, 255, 0.3);
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+}
+
+.date {
+  font-style: bold;
+  font-size: 14px;
+  color: #ee6c4d;
+  padding: 0px;
+  margin: 0px;
+}
+
+.comment {
+  font-style: bolder;
+  background: rgba(255, 255, 255, 0.2);
+  font-size: 19px;
+  color: black;
+  font-family: "Roboto", sans-serif;
+}
+
+.input {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.mentor-edit-button {
+  background-color: #293241;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0px 2px;
+  margin: 0px 2px;
+  width: 50px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+.mentor-edit-button:hover {
+  background-color: #ee6c4d;
+}
+
+.mentor-delete-button {
+  background-color: #293241;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  padding: 0px 2px;
+  margin: 0px 2px;
+  width: 50px;
+  font-size: 16px;
+  font-family: "Roboto", sans-serif;
+}
+
+.mentor-delete-button:hover {
+  background-color: #ee6c4d;
 }
