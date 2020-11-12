@@ -17,7 +17,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       let response = await fetch(`http://localhost:5000/link/?week=${week}`);
       let data = await response.json();
       setLink(data.data);
-      console.log(data.data)
+      console.log(link)
     }
     getLink();
   }, [week]);
@@ -85,7 +85,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
 
   
   function addLink(e, week) {
-    setLink([...link, { projectLink: e.target.value, week: week }]);
+    setLink([...link, { projectlink: e.target.value, week: week }]);
   }
 
   function AccordianTitle({ children, onClick }) {
@@ -97,7 +97,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
   }
   function editLink(key, text) {
     let index = link.findIndex((object) => object.id === key);
-    link[index].projectLink = text;
+    link[index].projectlink = text;
     setLink([...link]);
   }
 

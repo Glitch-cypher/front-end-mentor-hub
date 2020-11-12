@@ -3,12 +3,13 @@ import React, { useState } from "react";
 
 function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
-  const [text, setText] = useState(object.projectLink);
+  const [text, setText] = useState(object.projectlink);
+  console.log(object)
   return (
     <div className="main-link-container">
       {!editing ? (
-        <a className="link-style" href={`https://${object.text}`}>
-          {object.text}
+        <a className="link-style" href={`https://${object.projectlink}`}>
+          {object.projectlink}
         </a>
       ) : null}
 
@@ -42,8 +43,8 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
         <button
           className="link-delete-button"
           onClick={() => {
-            deleteLink(object.key);
-            setDeleteId(object.key);
+            deleteLink(object.id);
+            setDeleteId(object.id);
           }}
         >
           delete
