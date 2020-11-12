@@ -7,8 +7,62 @@
   text-align: center;
   font-family: "Bebas Neue", cursive;
   font-size: 35px;
-  color: #fffffe;
+  color: #ee6c4d;
+  background: #293241;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.48);
   padding: 0;
   margin: 0;
+}
+
+/* .motivational-image {
+  height: 200px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  top: 400px;
+} */
+
+.front-page-content {
+  text-align: center;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+.front-page-title {
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.58);
+}
+
+.nav-bar {
+  font-family: "Bebas Neue", cursive;
+  font-size: 25px;
+  text-decoration: none;
+  background: #98c1d9;
+  text-align: center;
+}
+
+.challenge-title {
+  color: #555;
+}
+
+.nav-bar:hover {
+  background-color: #555;
+}
+
+.challenge-title:hover {
+  color: #98c1d9;
+}
+
+.challenge-title {
+  color: white;
+  text-decoration: none;
+}
+
+.highlight-word {
+  color: #ee6c4d;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.58);
 }

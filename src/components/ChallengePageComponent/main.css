@@ -2,16 +2,18 @@
   display: flex;
   /* adds space between */
   justify-content: space-between;
+  background: #98c1d9;
 }
 
 .side-bar {
   width: 400px;
   min-height: 91vh;
   max-width: 30%;
-  background: #f9bc60;
+  background-image: url("https://images.unsplash.com/photo-1544030834-45f2dcb88b4a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
   padding: 15px;
   border: 2px black solid;
 }
+
 .side {
   max-width: 100%;
   overflow: scroll;

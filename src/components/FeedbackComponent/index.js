@@ -19,6 +19,7 @@ function Feedback({
       {!editing ? <p className="comment">{object.comment}</p> : null}
       {editing ? (
         <input
+          className="mentor-input"
           value={text}
           onChange={(e) => setText(e.target.value)}
           visibility={editing}
@@ -34,6 +35,7 @@ function Feedback({
       ) : null}
       {!editing ? (
         <button
+          className="mentor-edit-button"
           onClick={() => {
             setEditing(true);
             console.log(editing);
@@ -43,6 +45,7 @@ function Feedback({
         </button>
       ) : null}
       <button
+        className="mentor-delete-button"
         onClick={() => {
           deleteComment(object.key);
           setDeleteId(object.key);
