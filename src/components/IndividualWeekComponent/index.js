@@ -8,16 +8,16 @@ import Link from "../Link/";
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
   const [activeItem, setActiveItem] = React.useState(4);
-  const [key, setKey] = useState(0);
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
   const [addedId, setAddedId] = useState(true);
 
   useEffect(() => {
     async function getLink() {
-      let response = await fetch(`http://localhost:5000/link/${week}`);
+      let response = await fetch(`http://localhost:5000/link/?week=${week}`);
       let data = await response.json();
-      setLink(data);
+      setLink(data.data);
+      console.log(data.data)
     }
     getLink();
   }, [week]);
@@ -28,14 +28,15 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[link.length]),
+        body: JSON.stringify(link[link.length -1]),
       };
       const response = await fetch(
         "http://localhost:5000/link/",
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
+      setLink([...link.slice(0, -1), ...data.data]);
+      console.log(data.data);
     }
     if (link !== []) {
       postLink();
@@ -66,7 +67,9 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const requestOptions = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[editId]),
+        body: JSON.stringify(link[link.findIndex((obj) => {
+          return obj.id === editId;
+        })]),
       };
       const response = await fetch(
         `http://localhost:5000/link/${editId}`,
@@ -80,12 +83,9 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     }
   }, [editId]);
 
-  function addKey() {
-    setKey(key + 1);
-    return key;
-  }
-  function addLink(e) {
-    setLink([...link, { text: e.target.value, week: week, key: addKey() }]);
+  
+  function addLink(e, week) {
+    setLink([...link, { projectLink: e.target.value, week: week }]);
   }
 
   function AccordianTitle({ children, onClick }) {
@@ -96,13 +96,13 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     );
   }
   function editLink(key, text) {
-    let index = link.findIndex((object) => object.key === key);
-    link[index].text = text;
+    let index = link.findIndex((object) => object.id === key);
+    link[index].projectLink = text;
     setLink([...link]);
   }
 
   function deleteLink(key) {
-    let index = link.findIndex((object) => object.key === key);
+    let index = link.findIndex((object) => object.id === key);
     setLink([...link.slice(0, index), ...link.slice(index + 1)]);
   }
 
@@ -116,7 +116,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
               if (object.week === week) {
                 return (
                   <Link
-                    key={object.key}
+                    key={object.id}
                     object={object}
                     deleteLink={deleteLink}
                     setDeleteId={setDeleteId}
@@ -134,7 +134,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
             placeholder="Add all links to this week"
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                addLink(e);
+                addLink(e, week);
                 e.target.value = "";
                 setAddedId(!addedId);
               }

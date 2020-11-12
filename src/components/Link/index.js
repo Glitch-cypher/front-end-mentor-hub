@@ -3,10 +3,10 @@ import React, { useState } from "react";
 
 function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
-  const [text, setText] = useState(object.text);
+  const [text, setText] = useState(object.projectLink);
   return (
     <div>
-      {!editing ? <a href={`https://${object.text}`}>{object.text}</a> : null}
+      {!editing ? <a href={`https://${object.projectLink}`}>{object.projectLink}</a> : null}
       {editing ? (
         <input
           className="link-edit-input"
@@ -15,9 +15,9 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
           visibility={editing}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              editLink(object.key, e.target.value);
+              editLink(object.id, e.target.value);
               setEditing(false);
-              setEditId(object.key);
+              setEditId(object.id);
             }
           }}
         />
@@ -37,8 +37,8 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
       <button
         className="link-delete-button"
         onClick={() => {
-          deleteLink(object.key);
-          setDeleteId(object.key);
+          deleteLink(object.id);
+          setDeleteId(object.id);
         }}
       >
         delete
