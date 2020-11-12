@@ -5,7 +5,6 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.projectLink);
   return (
-
     <div className="main-link-container">
       {!editing ? (
         <a className="link-style" href={`https://${object.text}`}>
@@ -49,6 +48,7 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
         >
           delete
         </button>
+      </div>
     </div>
   );
 }
