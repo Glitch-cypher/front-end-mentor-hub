@@ -10,11 +10,11 @@ function Feedback({
 }) {
   console.log(object);
   const [editing, setEditing] = useState(false);
-  const [text, setText] = useState(object.comment);
+  const [text, setText] = useState(object.feedback);
   return (
     <div className="comment-container">
-      <h6 className="date">{object.dateAdded}</h6>
-      {!editing ? <p className="comment">{object.comment}</p> : null}
+      <h6 className="date">{object.date}</h6>
+      {!editing ? <p className="comment">{object.feedback}</p> : null}
       {editing ? (
         <input
           className="mentor-input"
@@ -23,9 +23,9 @@ function Feedback({
           visibility={editing}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              editComment(object.key, e.target.value);
+              editComment(object.id, e.target.value);
               setEditing(false);
-              setEditId(object.key);
+              setEditId(object.id);
             }
           }}
         />
@@ -44,8 +44,9 @@ function Feedback({
       <button
         className="mentor-delete-button"
         onClick={() => {
-          deleteComment(object.key);
-          setDeleteId(object.key);
+          deleteComment(object.id);
+          setDeleteId(object.id);
+
         }}
       >
         delete

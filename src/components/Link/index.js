@@ -3,14 +3,16 @@ import React, { useState } from "react";
 
 function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
-  const [text, setText] = useState(object.text);
+  const [text, setText] = useState(object.projectLink);
   return (
+
     <div className="main-link-container">
       {!editing ? (
         <a className="link-style" href={`https://${object.text}`}>
           {object.text}
         </a>
       ) : null}
+
       {editing ? (
         <input
           className="link-edit-input"
@@ -19,9 +21,9 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
           visibility={editing}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              editLink(object.key, e.target.value);
+              editLink(object.id, e.target.value);
               setEditing(false);
-              setEditId(object.key);
+              setEditId(object.id);
             }
           }}
         />
@@ -47,7 +49,6 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
         >
           delete
         </button>
-      </div>
     </div>
   );
 }
