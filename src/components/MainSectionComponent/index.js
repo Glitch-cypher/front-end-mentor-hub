@@ -11,11 +11,12 @@ function MainSection({ currentWeek, week }) {
     {
       id: 1,
       title: "Week 1 - Basic JS",
-      description: `"Time to start your journey! We will be learning the basics of Javascript with the mentees."`,
+      description: `Time to start your journey! We will be learning the basics of Javascript with the mentees.`,
       quote: `“Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less” - Marie Curie `,
       learning: `code structure, variables, data types, assignment operator, basic functions, for loop, while loop, objects, arrays
       `,
       challenge: "The challenge is assigning varibles",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 2,
@@ -24,6 +25,7 @@ function MainSection({ currentWeek, week }) {
       quote: `“The work of today is the history of tomorrow, and we are its makers” - Juliette Gordon Low`,
       learning: `Fat arrows, immutability, array methods, prototypes, error handling`,
       challenge: "The challenge is assigning array methods ..",
+      challengeLink: "https://www.codewars.com/kata/5bc052f93f43de7054000188",
     },
     {
       id: 3,
@@ -34,6 +36,7 @@ function MainSection({ currentWeek, week }) {
       quote: "im a motivational quote",
       learning: `Fetch requests, SQL, Postman, Heroku`,
       challenge: "The challenge is node",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 4,
@@ -43,6 +46,7 @@ function MainSection({ currentWeek, week }) {
       quote: `“Success is not final, failure is not fatal: it is the courage to continue that counts.” - Winston Churchill`,
       learning: `Restful API's, middleware, creating a full stack application`,
       challenge: "The challenge is backend",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 5,
@@ -54,6 +58,7 @@ function MainSection({ currentWeek, week }) {
       "Life is 10% what happens to me and 90% of how I react to it." - Charles Swindoll`,
       learning: `JSX, Babel, React Virtual DOM, frameworks, spread and slice, immutability`,
       challenge: "The challenge is react ting",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 6,
@@ -64,6 +69,7 @@ function MainSection({ currentWeek, week }) {
       quote: `"I’ve missed more than 9000 shots in my career. I’ve lost almost 300 games. 26 times I’ve been trusted to take the game winning shot and missed. I’ve failed over and over and over again in my life. And that is why I succeed." - Michael Jordan`,
       learning: `Fetch requests, SQL`,
       challenge: "The challenge is node",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 7,
@@ -74,6 +80,7 @@ function MainSection({ currentWeek, week }) {
       quote: `"Your time is limited, so don’t waste it living someone else’s life." - Steve Jobs`,
       learning: `Oauth, authentication, usermanagement, node.js`,
       challenge: "The challenge is making username and password system",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 8,
@@ -83,6 +90,7 @@ function MainSection({ currentWeek, week }) {
       quote: `"live, laugh, love" - Maxine Tillman`,
       learning: `Oauth, authentication, usermanagement, node.js`,
       challenge: "The challenge is making username and password system",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 9,
@@ -94,6 +102,7 @@ function MainSection({ currentWeek, week }) {
       quote: `"You can never cross the ocean until you have the courage to lose sight of the shore." - Christopher Columbus`,
       learning: `NPM, databases, SQL`,
       challenge: "The challenge is making username and password system",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 10,
@@ -104,6 +113,7 @@ function MainSection({ currentWeek, week }) {
       quote: `"I have been impressed with the urgency of doing. Knowing is not enough; we must apply. Being willing is not enough; we must do." - Leonardo da Vinci`,
       learning: `Render React to Server, optimizing re-renders, inline styles, lifecycle method`,
       challenge: "The challenge is React",
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 11,
@@ -114,6 +124,7 @@ function MainSection({ currentWeek, week }) {
       quote: `"I didn’t fail the test. I just found 100 ways to do it wrong." - Benjamin Franklin
       `,
       challenge: `React Testing Library, jest, rendering component testing, running a complete app testing`,
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
       id: 12,
@@ -124,14 +135,17 @@ function MainSection({ currentWeek, week }) {
       quote: `"Nothing is impossible, the word itself says, “I’m possible!”" - Audrey Hepburn
       `,
       challenge: `QA, AWS, Agile`,
+      challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
   ];
   return (
-    <IndividualChallenge
-      week={week}
-      dataArray={dataArray}
-      currentWeek={currentWeek}
-    />
+    <div className="challenge-page-container">
+      <IndividualChallenge
+        week={week}
+        dataArray={dataArray}
+        currentWeek={currentWeek}
+      />
+    </div>
   );
 }
 

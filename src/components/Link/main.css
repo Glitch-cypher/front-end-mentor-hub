@@ -32,14 +32,29 @@
   outline: none;
   height: 30px;
   top: 10px;
-  width: 400px;
+  width: 300px;
   margin: 0 auto;
   padding: 10px;
   color: white;
   font-size: 14px;
   font-family: "Roboto", sans-serif;
 }
-.link-style {
+.link-style:link {
   text-decoration: none;
-  background: green;
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+.link-style:hover {
+  text-decoration: underline;
+}
+.link-style:visited {
+  color: white;
+}
+.buttons {
+  height: auto;
+  float: right;
+}
+
+.main-link-container {
+  padding: 5px;
 }

@@ -109,7 +109,18 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
   function AccordianBody({ children, show }) {
     return (
       <div className={cs(styles.body, { [styles.hidden]: !show })}>
-        {children}
+        <div className={styles.bodyText}>
+          <p className={styles.p}>{children.description}</p>
+          <div className={styles.quoteBox}>
+            <quote className={styles.quote}>{children.quote}</quote>
+          </div>
+          <h2 className={styles.h2}>Learning:</h2>
+          <p className={styles.p}>{children.learning}</p>
+          <h2 className={styles.h2}>Challenge:</h2>
+          <a className={styles.challenge} href={children.challengeLink}>
+            {children.challenge}
+          </a>
+        </div>
         <div className={styles.linkInputContainer}>
           <div className={styles.linkbox}>
             {link.map((object) => {
@@ -158,11 +169,11 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
             >
               {object.title}
             </AccordianTitle>
-            <AccordianBody show={activeItem === object.id}>
-              {object.description}
-              <br />
-              {object.challenge}
-            </AccordianBody>
+            <div>
+              <AccordianBody show={activeItem === object.id}>
+                {object}
+              </AccordianBody>
+            </div>
           </div>
         );
       })}
