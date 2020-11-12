@@ -20,6 +20,7 @@ function Sidebar({ week }) {
     }
     getFeedback();
   }, [week]);
+  //Potentially needs to be last due to running useEffect on launch
 
   useEffect(() => {
     async function postFeedback() {
@@ -35,6 +36,8 @@ function Sidebar({ week }) {
       );
       const data = await response.json();
       console.log(data);
+      // setFeedback(data.data)
+      setFeedback([...feedback.slice(0, -1), ...data.data])
       // let week = data.data.filter((object)=> object.week === week)
       // setFeedback(...week);
       //Change backend to return the full database
