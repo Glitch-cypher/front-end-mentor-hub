@@ -37,11 +37,10 @@ function Sidebar({ week }) {
       const data = await response.json();
       console.log(data);
       // setFeedback(data.data)
-      setFeedback([...feedback.slice(0, -1), ...data.data])
+      setFeedback([...feedback.slice(0, -1), ...data.data]);
       // let week = data.data.filter((object)=> object.week === week)
       // setFeedback(...week);
       //Change backend to return the full database
-
     }
     if (feedback !== []) {
       postFeedback();
@@ -72,7 +71,13 @@ function Sidebar({ week }) {
       const requestOptions = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(feedback[editId]),
+        body: JSON.stringify(
+          feedback[
+            feedback.findIndex((obj) => {
+              return obj.id === editId;
+            })
+          ]
+        ),
         //look for return index property
       };
       const response = await fetch(
@@ -81,7 +86,22 @@ function Sidebar({ week }) {
       );
       const data = await response.json();
       console.log(data);
+      // setFeedback([
+      //   ...feedback.slice(
+      //     0,
+      //     feedback.findIndex((obj) => {
+      //       return obj.id === editId;
+      //     })
+      //   ),
+      //   ...data.data,
+      //   ...(feedback.slice(
+      //     feedback.findIndex((obj) => {
+      //       return obj.id === editId;
+      //     })
+      //   ) + 1),
+      // ]); //should stop reordering comments after edit is made
     }
+
     if (feedback !== []) {
       updateFeedback();
     }
