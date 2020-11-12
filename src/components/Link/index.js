@@ -4,7 +4,6 @@ import React, { useState } from "react";
 function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.projectlink);
-  console.log(object)
   return (
     <div className="main-link-container">
       {!editing ? (

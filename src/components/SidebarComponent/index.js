@@ -7,18 +7,9 @@ function Sidebar({ week }) {
   const [input, setInput] = useState();
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
-  const [addedId, setAddedId] = useState(true);
+  const [addedId, setAddedId] = useState();
 
-  useEffect(() => {
-    async function getFeedback() {
-      let response = await fetch(
-        `http://localhost:5000/feedback/?week=${week}`
-      );
-      let data = await response.json();
-      setFeedback(data.data);
-    }
-    getFeedback();
-  }, [week]);
+
   //Potentially needs to be last due to running useEffect on launch
 
   useEffect(() => {
@@ -56,6 +47,7 @@ function Sidebar({ week }) {
         requestOptions
       );
       const data = await response.json();
+
     }
     if (feedback !== []) {
       deleteFeedback();
@@ -103,6 +95,17 @@ function Sidebar({ week }) {
     }
   }, [editId]);
 
+  useEffect(() => {
+    async function getFeedback() {
+      let response = await fetch(
+        `http://localhost:5000/feedback/?week=${week}`
+      );
+      let data = await response.json();
+      setFeedback(data.data);
+    }
+    getFeedback();
+  }, [week]);
+
   function addFeedback(input, week, dateAdded) {
     setFeedback([
       ...feedback,
@@ -141,7 +144,7 @@ function Sidebar({ week }) {
           if (e.key === "Enter") {
             addFeedback(input, week, new Date().toGMTString());
             setInput((e.target.value = ""));
-            setAddedId(!addedId);
+            setAddedId(addedId+1);
           }
         }}
         onChange={(e) => {

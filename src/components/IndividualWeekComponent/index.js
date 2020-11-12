@@ -10,21 +10,14 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [activeItem, setActiveItem] = React.useState(4);
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
-  const [addedId, setAddedId] = useState(true);
+  const [addedId, setAddedId] = useState();
 
-  useEffect(() => {
-    async function getLink() {
-      let response = await fetch(`http://localhost:5000/link/?week=${week}`);
-      let data = await response.json();
-      setLink(data.data);
-      console.log(link)
-    }
-    getLink();
-  }, [week]);
+
 
   useEffect(() => {
     async function postLink() {
       // POST request using fetch with async/await
+      console.log(link[link.length -1])
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,8 +28,8 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
         requestOptions
       );
       const data = await response.json();
+      console.log(`Recieved from post request ${data.data}`)
       setLink([...link.slice(0, -1), ...data.data]);
-      console.log(data.data);
     }
     if (link !== []) {
       postLink();
@@ -54,7 +47,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
+
     }
     if (link !== []) {
       deleteLink();
@@ -83,6 +76,16 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     }
   }, [editId]);
 
+  useEffect(() => {
+    async function getLink() {
+      let response = await fetch(`http://localhost:5000/link/?week=${week}`);
+      let data = await response.json();
+      setLink(data.data);
+      console.log(`${data.data} Hello`)
+    }
+    getLink();
+  }, [week]);
+
   
   function addLink(e, week) {
     setLink([...link, { projectlink: e.target.value, week: week }]);
@@ -95,6 +98,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       </button>
     );
   }
+
   function editLink(key, text) {
     let index = link.findIndex((object) => object.id === key);
     link[index].projectlink = text;
@@ -146,8 +150,9 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
             onKeyPress={(e) => {
               if (e.key === "Enter") {
                 addLink(e, week);
+                console.log(link)
+                setAddedId(addedId+1);
                 e.target.value = "";
-                setAddedId(!addedId);
               }
             }}
           />
