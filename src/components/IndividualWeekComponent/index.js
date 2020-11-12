@@ -55,7 +55,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const data = await response.json();
       console.log(data);
     }
-    if (deleteId !== []) {
+    if (link !== []) {
       deleteLink();
     }
   }, [deleteId]);
@@ -75,7 +75,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const data = await response.json();
       console.log(data);
     }
-    if (editId !== []) {
+    if (link !== []) {
       updateLink();
     }
   }, [editId]);
