@@ -9,6 +9,7 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
       {!editing ? <a href={`https://${object.text}`}>{object.text}</a> : null}
       {editing ? (
         <input
+          className="link-edit-input"
           value={text}
           onChange={(e) => setText(e.target.value)}
           visibility={editing}
@@ -21,8 +22,10 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
           }}
         />
       ) : null}
+
       {!editing ? (
         <button
+          className="link-edit-button"
           onClick={() => {
             setEditing(true);
             console.log(editing);
@@ -32,6 +35,7 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
         </button>
       ) : null}
       <button
+        className="link-delete-button"
         onClick={() => {
           deleteLink(object.key);
           setDeleteId(object.key);

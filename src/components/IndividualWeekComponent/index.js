@@ -110,24 +110,27 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     return (
       <div className={cs(styles.body, { [styles.hidden]: !show })}>
         {children}
+        <div className={styles.linkInputContainer}>
+          <div className={styles.linkbox}>
+            {link.map((object) => {
+              if (object.week === week) {
+                return (
+                  <Link
+                    key={object.key}
+                    object={object}
+                    deleteLink={deleteLink}
+                    setDeleteId={setDeleteId}
+                    setEditId={setEditId}
+                    editLink={editLink}
+                  />
+                );
+              }
+              return null;
+            })}
+          </div>
 
-        {link.map((object) => {
-          if (object.week === week) {
-            return (
-              <Link
-                key={object.key}
-                object={object}
-                deleteLink={deleteLink}
-                setDeleteId={setDeleteId}
-                setEditId={setEditId}
-                editLink={editLink}
-              />
-            );
-          }
-          return null;
-        })}
-        <div>
           <input
+            className={styles.input}
             placeholder="Add all links to this week"
             onKeyPress={(e) => {
               if (e.key === "Enter") {
