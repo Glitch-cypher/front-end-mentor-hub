@@ -15,7 +15,6 @@ function Sidebar({ week }) {
         `http://localhost:5000/feedback/?week=${week}`
       );
       let data = await response.json();
-      console.log(data.data);
       setFeedback(data.data);
     }
     getFeedback();
@@ -35,7 +34,6 @@ function Sidebar({ week }) {
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
       // setFeedback(data.data)
       setFeedback([...feedback.slice(0, -1), ...data.data]);
       // let week = data.data.filter((object)=> object.week === week)
@@ -58,7 +56,6 @@ function Sidebar({ week }) {
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
     }
     if (feedback !== []) {
       deleteFeedback();
@@ -85,7 +82,6 @@ function Sidebar({ week }) {
         requestOptions
       );
       const data = await response.json();
-      console.log(data);
       // setFeedback([
       //   ...feedback.slice(
       //     0,
