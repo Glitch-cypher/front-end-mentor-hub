@@ -132,7 +132,9 @@ function Sidebar({ week }) {
     let index = feedback.findIndex((object) => object.id === key);
     setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
   }
-  let reverse = feedback.reverse();
+
+  let reverse = [...feedback].reverse();
+
   return (
     <div>
       <h2 className="feedback-title">Mentor Feedback - Week {week}</h2>
