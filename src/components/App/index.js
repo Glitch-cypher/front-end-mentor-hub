@@ -1,6 +1,7 @@
 import "./App.css";
 import ChallengePage from "../ChallengePageComponent";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+//import logo from "/Users/max/schoolOfCode/week8/projectWeek/front-end-project-week-the-orange-optimistic-scottish-llamas/src/components/App/logo.png";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
               <h1 className="front-page-title">
                 Welcome to the School of Code bootcamp progress tracker!🚀
               </h1>
+
               <h2 className="front-page-student-title">
                 <span className="highlight-word">Mentees:</span> Buckle up for
                 an incredible journey of intensive learning.
@@ -53,21 +55,23 @@ function App() {
                 </p>
               </div>
               <p>
-                <span>Mentors,</span> you will be able to keep track of what
-                your mentee is learning and what projects they need help with.
-                Each week we have listed the curriculum and an additional
-                challenge to help our mentees master the topics covered. Your
-                mentee will post any specific help they require on either
-                personal projects, questions, or topics covered. You will have a
-                box to answer questions and give feedback.
+                <span className="front-page-text-style">Mentors,</span> you will
+                be able to keep track of what your mentee is learning and what
+                projects they need help with. Each week we have listed the
+                curriculum and an additional challenge to help our mentees
+                master the topics covered. Your mentee will post any specific
+                help they require on either personal projects and tasks from the
+                week. You will have a box to give feedback and advice. By seeing
+                exactly what we are covering, we hope you will be able to have
+                an effective telephone session by having prior knowledge of
+                where your mentee is.
               </p>
-
               <p>
-                <span>Mentees,</span> you have the opportunity to get the most
-                out of your mentor by taking control of your development. Each
-                week we have listed what you’ll be covering. You can submit
-                projects or questions you would like your mentor to specifically
-                look over.
+                <span className="front-page-text-style">Mentees,</span> you have
+                the opportunity to get the most out of your mentor by taking
+                control of your development. Each week we have listed what
+                you’ll be covering. You can submit projects or questions you
+                would like your mentor to specifically look over.
               </p>
             </div>
           </Route>
