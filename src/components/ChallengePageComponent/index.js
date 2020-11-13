@@ -4,7 +4,7 @@ import Sidebar from "../SidebarComponent";
 import MainSection from "../MainSectionComponent/index";
 
 function ChallengePage() {
-  const [week, setWeek] = useState(1);
+  const [week, setWeek] = useState();
 
   return (
     <div className="main-content">
