@@ -7,12 +7,10 @@ import Link from "../Link/";
 
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
-  const [activeItem, setActiveItem] = React.useState(4);
+  //const [activeItem, setActiveItem] = React.useState(currentWeek);
   const [deleteId, setDeleteId] = useState();
   const [editId, setEditId] = useState();
   const [addedId, setAddedId] = useState();
-
-
 
   useEffect(() => {
     async function postLink() {
@@ -21,7 +19,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[link.length -1]),
+        body: JSON.stringify(link[link.length - 1]),
       };
       const response = await fetch(
         "http://localhost:5000/link/",
@@ -60,9 +58,13 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       const requestOptions = {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[link.findIndex((obj) => {
-          return obj.id === editId;
-        })]),
+        body: JSON.stringify(
+          link[
+            link.findIndex((obj) => {
+              return obj.id === editId;
+            })
+          ]
+        ),
       };
       const response = await fetch(
         `http://localhost:5000/link/${editId}`,
@@ -86,7 +88,6 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     getLink();
   }, [week]);
 
-  
   function addLink(e, week) {
     setLink([...link, { projectlink: e.target.value, week: week }]);
   }
@@ -169,15 +170,12 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
             <AccordianTitle
               onClick={() => {
                 currentWeek(object.id);
-                setActiveItem(object.id);
               }}
             >
               {object.title}
             </AccordianTitle>
             <div>
-              <AccordianBody show={activeItem === object.id}>
-                {object}
-              </AccordianBody>
+              <AccordianBody show={week === object.id}>{object}</AccordianBody>
             </div>
           </div>
         );

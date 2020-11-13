@@ -41,10 +41,13 @@
 
 .quote {
   font-style: italic;
-  font-family: "Sriracha", cursive;
+  font-family: "PT Sans", sans-serif;
+  font-weight: bold;
+  color: #98c1d9;
 }
 .quoteBox {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(248, 162, 104, 0.1);
+  padding: 10px;
 }
 
 .challenge:link {
@@ -55,7 +58,8 @@
 .challenge:hover {
   text-decoration: underline;
 }
-.challenge:visited:active {
+.challenge:visited,
+.challenge:active {
   color: white;
 }
 
