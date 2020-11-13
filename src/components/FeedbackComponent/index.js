@@ -7,10 +7,46 @@ function Feedback({
   deleteComment,
   setEditId,
   setDeleteId,
+  feedback,
+  setFeedback,
 }) {
   console.log(object);
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.feedback);
+
+  async function updateFeedback(id) {
+    // POST request using fetch with async/await
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(
+        feedback[
+          feedback.findIndex((obj) => {
+            return obj.id === id;
+          })
+        ]
+      ),
+      //look for return index property
+    };
+    const response = await fetch(
+      `http://localhost:5000/feedback/${editId}`,
+      requestOptions
+    );
+    const data = await response.json();
+  }
+
+  async function deleteFeedback() {
+    // DELETE request using fetch with async/await
+    const requestOptions = {
+      method: "DELETE",
+    };
+    const response = await fetch(
+      `http://localhost:5000/feedback/${deleteId}`,
+      requestOptions
+    );
+    const data = await response.json();
+  }
+
   return (
     <div className="comment-container">
       <h6 className="date">{object.date}</h6>
@@ -26,6 +62,7 @@ function Feedback({
               editComment(object.id, e.target.value);
               setEditing(false);
               setEditId(object.id);
+              updateFeedback(object.id);
             }
           }}
         />
@@ -46,7 +83,7 @@ function Feedback({
         onClick={() => {
           deleteComment(object.id);
           setDeleteId(object.id);
-
+          deleteFeedback(object.id);
         }}
       >
         delete

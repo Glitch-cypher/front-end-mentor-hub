@@ -9,6 +9,9 @@ function App() {
       <div className="app">
         <nav className="nav-bar">
           <h1 className="page-title">SOC: Mentor Hub</h1>
+          <Link className="home-page" to="/">
+            HOME
+          </Link>
           <Link className="challenge-title" to="/challengepage">
             WEEKLY CURRICULUM & CHALLENGES
           </Link>
