@@ -11,10 +11,10 @@
   background-image: url("https://images.unsplash.com/photo-1544030834-45f2dcb88b4a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80");
   padding: 15px;
   border: 2px black solid;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .side {
   max-width: 100%;
-  overflow: scroll;
 }

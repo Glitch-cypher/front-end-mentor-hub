@@ -78,19 +78,20 @@ function Sidebar({ week }) {
   return (
     <div>
       <h2 className="feedback-title">Mentor Feedback - Week {week}</h2>
-      <input
-        className="input"
-        placeholder="leave a comment.."
-        onKeyPress={(e) => {
-          if (e.key === "Enter") {
-            let date = new Date().toGMTString();
-            let feedback = e.target.value;
-            postFeedback({ feedback: feedback, week: week, date: date });
-            console.log(date);
-            e.target.value = "";
-          }
-        }}
-      />
+      {week ? (
+        <input
+          className="input"
+          placeholder="leave a comment.."
+          onKeyPress={(e) => {
+            if (e.key === "Enter") {
+              let date = new Date().toGMTString();
+              let feedback = e.target.value;
+              postFeedback({ feedback: feedback, week: week, date: date });
+              e.target.value = "";
+            }
+          }}
+        />
+      ) : null}
 
       {reverse.map((object) => {
         if (object.week === week) {
