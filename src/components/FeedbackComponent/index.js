@@ -1,14 +1,7 @@
 import "./main.css";
 import React, { useState } from "react";
 
-function Feedback({
-  object,
-  editComment,
-  deleteComment,
-  setEditId,
-  setDeleteId,
-}) {
-  console.log(object);
+function Feedback({ object, editComment, deleteComment }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.feedback);
   return (
@@ -25,7 +18,6 @@ function Feedback({
             if (e.key === "Enter") {
               editComment(object.id, e.target.value);
               setEditing(false);
-              setEditId(object.id);
             }
           }}
         />
@@ -35,7 +27,6 @@ function Feedback({
           className="mentor-edit-button"
           onClick={() => {
             setEditing(true);
-            console.log(editing);
           }}
         >
           edit
@@ -45,8 +36,6 @@ function Feedback({
         className="mentor-delete-button"
         onClick={() => {
           deleteComment(object.id);
-          setDeleteId(object.id);
-
         }}
       >
         delete
