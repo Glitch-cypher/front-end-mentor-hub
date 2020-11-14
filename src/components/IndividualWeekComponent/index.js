@@ -13,7 +13,6 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       let response = await fetch(`http://localhost:5000/link`);
       let data = await response.json();
       setLink(data.data);
-      alert(link);
     }
     getLink();
   }, []);
