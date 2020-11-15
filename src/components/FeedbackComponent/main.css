@@ -22,6 +22,10 @@
   font-size: max(19px, 2.5vh);
   color: black;
   font-family: "Roboto", sans-serif;
+  word-wrap: break-word;
+  max-height: max(10vh, 60px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .input {

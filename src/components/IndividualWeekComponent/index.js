@@ -126,7 +126,11 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
           <div key={object.id}>
             <AccordianTitle
               onClick={() => {
-                currentWeek(object.id);
+                if (week === object.id) {
+                  currentWeek();
+                } else {
+                  currentWeek(object.id);
+                }
               }}
             >
               {object.title}
