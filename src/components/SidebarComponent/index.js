@@ -13,7 +13,7 @@ function Sidebar({ week }) {
       body: JSON.stringify(object),
     };
     const response = await fetch(
-      "https://orange-llama-server.herokuapp.com/feedback/",
+      "https://orange-llamas.herokuapp.com/feedback/",
       requestOptions
     );
     const data = await response.json();
@@ -27,7 +27,7 @@ function Sidebar({ week }) {
       method: "DELETE",
     };
     const response = await fetch(
-      `https://orange-llama-server.herokuapp.com/feedback/${id}`,
+      `https://orange-llamas.herokuapp.com/feedback/${id}`,
       requestOptions
     );
     const data = await response.json();
@@ -40,7 +40,7 @@ function Sidebar({ week }) {
       body: JSON.stringify(object),
     };
     const response = await fetch(
-      `https://orange-llama-server.herokuapp.com/feedback/${object.id}`,
+      `https://orange-llamas.herokuapp.com/feedback/${object.id}`,
       requestOptions
     );
     const data = await response.json();
@@ -56,7 +56,7 @@ function Sidebar({ week }) {
   useEffect(() => {
     async function getFeedback() {
       let response = await fetch(
-        `https://orange-llama-server.herokuapp.com/feedback/`
+        `https://orange-llamas.herokuapp.com/feedback/`
       );
       let data = await response.json();
       setFeedback(data.data);
