@@ -122,7 +122,7 @@ function MainSection({ currentWeek, week }) {
       challengeLink: "https://www.codewars.com/kata/563e320cee5dddcf77000158",
     },
     {
-      id: 11,
+      id: null,
       title: "Week 11 - Testing",
       description: `
       We are going to learn how to write our own tests for React. 
