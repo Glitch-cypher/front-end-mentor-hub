@@ -1,7 +1,7 @@
 import "./main.css";
 import React, { useState } from "react";
 
-function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
+function Link({ object, deleteLink, updateLink }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.projectlink);
   return (
@@ -20,9 +20,8 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
           visibility={editing}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              editLink(object.id, e.target.value);
+              updateLink(object.id, e.target.value);
               setEditing(false);
-              setEditId(object.id);
             }
           }}
         />
@@ -33,7 +32,6 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
             className="link-edit-button"
             onClick={() => {
               setEditing(true);
-              console.log(editing);
             }}
           >
             edit
@@ -43,7 +41,6 @@ function Link({ object, deleteLink, setDeleteId, setEditId, editLink }) {
           className="link-delete-button"
           onClick={() => {
             deleteLink(object.id);
-            setDeleteId(object.id);
           }}
         >
           delete

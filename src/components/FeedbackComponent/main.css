@@ -6,12 +6,11 @@
   background: transparent;
   background: rgba(255, 255, 255, 0.3);
   font-family: "Roboto", sans-serif;
-  font-size: 15px;
 }
 
 .date {
   font-style: bold;
-  font-size: 14px;
+  font-size: max(13px, 1.7vh);
   color: #ee6c4d;
   padding: 0px;
   margin: 0px;
@@ -20,9 +19,13 @@
 .comment {
   font-style: bolder;
   background: rgba(255, 255, 255, 0.2);
-  font-size: 19px;
+  font-size: max(19px, 2.5vh);
   color: black;
   font-family: "Roboto", sans-serif;
+  word-wrap: break-word;
+  max-height: max(10vh, 60px);
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .input {
@@ -39,8 +42,8 @@
   display: inline-block;
   padding: 0px 2px;
   margin: 0px 2px;
-  width: 50px;
-  font-size: 16px;
+  width: max(50px, 6vh);
+  font-size: max(16px, 2vh);
   font-family: "Roboto", sans-serif;
 }
 
@@ -57,8 +60,8 @@
   display: inline-block;
   padding: 0px 2px;
   margin: 0px 2px;
-  width: 50px;
-  font-size: 16px;
+  width: max(50px, 6vh);
+  font-size: max(16px, 2vh);
   font-family: "Roboto", sans-serif;
 }
 

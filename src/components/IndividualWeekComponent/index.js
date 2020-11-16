@@ -7,89 +7,66 @@ import Link from "../Link/";
 
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
-  //const [activeItem, setActiveItem] = React.useState(currentWeek);
-  const [deleteId, setDeleteId] = useState();
-  const [editId, setEditId] = useState();
-  const [addedId, setAddedId] = useState();
-
-  useEffect(() => {
-    async function postLink() {
-      // POST request using fetch with async/await
-      console.log(link[link.length -1])
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(link[link.length - 1]),
-      };
-      const response = await fetch(
-        "http://localhost:5000/link/",
-        requestOptions
-      );
-      const data = await response.json();
-      console.log(`Recieved from post request ${data.data}`)
-      setLink([...link.slice(0, -1), ...data.data]);
-    }
-    if (link !== []) {
-      postLink();
-    }
-  }, [addedId]);
-
-  useEffect(() => {
-    async function deleteLink() {
-      // POST request using fetch with async/await
-      const requestOptions = {
-        method: "DELETE",
-      };
-      const response = await fetch(
-        `http://localhost:5000/link/${deleteId}`,
-        requestOptions
-      );
-      const data = await response.json();
-
-    }
-    if (link !== []) {
-      deleteLink();
-    }
-  }, [deleteId]);
-
-  useEffect(() => {
-    async function updateLink() {
-      // POST request using fetch with async/await
-      const requestOptions = {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(
-          link[
-            link.findIndex((obj) => {
-              return obj.id === editId;
-            })
-          ]
-        ),
-      };
-      const response = await fetch(
-        `http://localhost:5000/link/${editId}`,
-        requestOptions
-      );
-      const data = await response.json();
-      console.log(data);
-    }
-    if (link !== []) {
-      updateLink();
-    }
-  }, [editId]);
 
   useEffect(() => {
     async function getLink() {
-      let response = await fetch(`http://localhost:5000/link/?week=${week}`);
+      let response = await fetch(
+        `https://orange-llama-server.herokuapp.com/link`
+      );
       let data = await response.json();
       setLink(data.data);
-      console.log(`${data.data} Hello`)
     }
     getLink();
-  }, [week]);
+  }, []);
 
-  function addLink(e, week) {
-    setLink([...link, { projectlink: e.target.value, week: week }]);
+  async function postLink(e, week = 4) {
+    // POST request using fetch with async/await
+    console.log(week);
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectlink: e.target.value, week: week }),
+    };
+    const response = await fetch(
+      "https://orange-llama-server.herokuapp.com/link",
+      requestOptions
+    );
+    const data = await response.json();
+    console.log(data.data);
+    setLink([...link, ...data.data]);
+  }
+
+  async function deleteLink(key) {
+    // DELETE request using fetch with async/await
+    let index = link.findIndex((object) => object.id === key);
+    setLink([...link.slice(0, index), ...link.slice(index + 1)]);
+    const requestOptions = {
+      method: "DELETE",
+    };
+    const response = await fetch(
+      `https://orange-llama-server.herokuapp.com/link/${key}`,
+      requestOptions
+    );
+    const data = await response.json();
+    console.log(data);
+  }
+
+  async function updateLink(id, projectLink) {
+    // PATCH request using fetch with async/await
+    console.log(projectLink);
+    const requestOptions = {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectLink }),
+    };
+    const response = await fetch(
+      `https://orange-llama-server.herokuapp.com/link/${id}`,
+      requestOptions
+    );
+    const data = await response.json();
+    let editedLink = data.data[0];
+    let index = link.findIndex((object) => object.id === editedLink.id);
+    setLink([...link.slice(0, index), editedLink, ...link.slice(index + 1)]);
   }
 
   function AccordianTitle({ children, onClick }) {
@@ -100,24 +77,13 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     );
   }
 
-  function editLink(key, text) {
-    let index = link.findIndex((object) => object.id === key);
-    link[index].projectlink = text;
-    setLink([...link]);
-  }
-
-  function deleteLink(key) {
-    let index = link.findIndex((object) => object.id === key);
-    setLink([...link.slice(0, index), ...link.slice(index + 1)]);
-  }
-
   function AccordianBody({ children, show }) {
     return (
       <div className={cs(styles.body, { [styles.hidden]: !show })}>
         <div className={styles.bodyText}>
           <p className={styles.p}>{children.description}</p>
           <div className={styles.quoteBox}>
-            <quote className={styles.quote}>{children.quote}</quote>
+            <p className={styles.quote}>{children.quote}</p>
           </div>
           <h2 className={styles.h2}>Learning:</h2>
           <p className={styles.p}>{children.learning}</p>
@@ -134,10 +100,8 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
                   <Link
                     key={object.id}
                     object={object}
+                    updateLink={updateLink}
                     deleteLink={deleteLink}
-                    setDeleteId={setDeleteId}
-                    setEditId={setEditId}
-                    editLink={editLink}
                   />
                 );
               }
@@ -150,9 +114,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
             placeholder="Add all links to this week"
             onKeyPress={(e) => {
               if (e.key === "Enter") {
-                addLink(e, week);
-                console.log(link)
-                setAddedId(addedId+1);
+                postLink(e, week);
                 e.target.value = "";
               }
             }}
@@ -169,7 +131,11 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
           <div key={object.id}>
             <AccordianTitle
               onClick={() => {
-                currentWeek(object.id);
+                if (week === object.id) {
+                  currentWeek();
+                } else {
+                  currentWeek(object.id);
+                }
               }}
             >
               {object.title}

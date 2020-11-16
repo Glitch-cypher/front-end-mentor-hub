@@ -22,6 +22,7 @@
 
 .challenge-page-container {
   position: relative;
-  max-height: 630px;
+  height: 90vh;
+  width: 60vw;
   overflow: scroll;
 }
