@@ -10,7 +10,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
 
   useEffect(() => {
     async function getLink() {
-      let response = await fetch(`http://orange-llamas.herokuapp.com/link`);
+      let response = await fetch(`https://orange-llamas.herokuapp.com/link`);
       let data = await response.json();
       setLink(data.data);
     }
@@ -26,7 +26,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       body: JSON.stringify({ projectlink: e.target.value, week: week }),
     };
     const response = await fetch(
-      "http://orange-llamas.herokuapp.com/link",
+      "https://orange-llamas.herokuapp.com/link",
       requestOptions
     );
     const data = await response.json();
@@ -42,7 +42,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       method: "DELETE",
     };
     const response = await fetch(
-      `http://orange-llamas.herokuapp.com/link/${key}`,
+      `https://orange-llamas.herokuapp.com/link/${key}`,
       requestOptions
     );
     const data = await response.json();
@@ -58,7 +58,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       body: JSON.stringify({ projectLink }),
     };
     const response = await fetch(
-      `http://orange-llamas.herokuapp.com/link/${id}`,
+      `https://orange-llamas.herokuapp.com/link/${id}`,
       requestOptions
     );
     const data = await response.json();
