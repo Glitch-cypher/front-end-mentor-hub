@@ -5,12 +5,14 @@ import cs from "classnames";
 import styles from "./accordian.module.css";
 import Link from "../Link/";
 
+const url = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
 
   useEffect(() => {
     async function getLink() {
-      let response = await fetch(`http://localhost:5000/link`);
+      let response = await fetch(`${url}/link`);
       let data = await response.json();
       setLink(data.data);
     }
@@ -25,7 +27,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectlink: e.target.value, week: week }),
     };
-    const response = await fetch("http://localhost:5000/link/", requestOptions);
+    const response = await fetch(`${url}/link/`, requestOptions);
     const data = await response.json();
     console.log(data.data);
     setLink([...link, ...data.data]);
@@ -38,10 +40,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     const requestOptions = {
       method: "DELETE",
     };
-    const response = await fetch(
-      `http://localhost:5000/link/${key}`,
-      requestOptions
-    );
+    const response = await fetch(`${url}/link/${key}`, requestOptions);
     const data = await response.json();
     console.log(data);
   }
@@ -54,10 +53,7 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectLink }),
     };
-    const response = await fetch(
-      `http://localhost:5000/link/${id}`,
-      requestOptions
-    );
+    const response = await fetch(`${url}/link/${id}`, requestOptions);
     const data = await response.json();
     let editedLink = data.data[0];
     let index = link.findIndex((object) => object.id === editedLink.id);
