@@ -31,6 +31,7 @@ function Sidebar({ week }) {
     };
     const response = await fetch(`${url}/feedback/${id}`, requestOptions);
     const data = await response.json();
+    console.log(data);
     let index = feedback.findIndex((object) => object.id === id);
     setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
   }
