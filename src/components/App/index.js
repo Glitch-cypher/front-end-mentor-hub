@@ -13,9 +13,9 @@ function App() {
           <Link className="challenge-title" to="/challengepage">
             WEEKLY CURRICULUM & CHALLENGES
           </Link>
-          <Link className="login" to="/login">
+          {/* <Link className="login" to="/login">
             Login / Sign up
-          </Link>
+          </Link> */}
         </nav>
 
         <Switch>
