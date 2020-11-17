@@ -5,12 +5,18 @@ import cs from "classnames";
 import styles from "./accordian.module.css";
 import Link from "../Link/";
 
+const url = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
 function IndividualChallenge({ currentWeek, week, dataArray }) {
   const [link, setLink] = useState([]);
 
   useEffect(() => {
     async function getLink() {
+<<<<<<< HEAD
+      let response = await fetch(`${url}/link`);
+=======
       let response = await fetch(`https://orange-llamas.herokuapp.com/link`);
+>>>>>>> c4cf3286ecb54ce928116b6ed885fb7ba07d164f
       let data = await response.json();
       setLink(data.data);
     }
@@ -25,10 +31,14 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectlink: e.target.value, week: week }),
     };
+<<<<<<< HEAD
+    const response = await fetch(`${url}/link/`, requestOptions);
+=======
     const response = await fetch(
       "https://orange-llamas.herokuapp.com/link",
       requestOptions
     );
+>>>>>>> c4cf3286ecb54ce928116b6ed885fb7ba07d164f
     const data = await response.json();
     console.log(data.data);
     setLink([...link, ...data.data]);
@@ -41,10 +51,14 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
     const requestOptions = {
       method: "DELETE",
     };
+<<<<<<< HEAD
+    const response = await fetch(`${url}/link/${key}`, requestOptions);
+=======
     const response = await fetch(
       `https://orange-llamas.herokuapp.com/link/${key}`,
       requestOptions
     );
+>>>>>>> c4cf3286ecb54ce928116b6ed885fb7ba07d164f
     const data = await response.json();
     console.log(data);
   }
@@ -57,10 +71,14 @@ function IndividualChallenge({ currentWeek, week, dataArray }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ projectLink }),
     };
+<<<<<<< HEAD
+    const response = await fetch(`${url}/link/${id}`, requestOptions);
+=======
     const response = await fetch(
       `https://orange-llamas.herokuapp.com/link/${id}`,
       requestOptions
     );
+>>>>>>> c4cf3286ecb54ce928116b6ed885fb7ba07d164f
     const data = await response.json();
     let editedLink = data.data[0];
     let index = link.findIndex((object) => object.id === editedLink.id);

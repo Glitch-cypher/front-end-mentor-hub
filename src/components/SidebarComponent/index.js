@@ -2,6 +2,8 @@ import "./main.css";
 import React, { useState, useEffect } from "react";
 import Feedback from "../FeedbackComponent";
 
+const url = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+
 function Sidebar({ week }) {
   const [feedback, setFeedback] = useState([]);
 
@@ -12,37 +14,35 @@ function Sidebar({ week }) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(object),
     };
-    const response = await fetch(
-      "https://orange-llamas.herokuapp.com/feedback/",
-      requestOptions
-    );
+    const response = await fetch(`${url}/feedback`, requestOptions);
     const data = await response.json();
     console.log(data);
     setFeedback([...feedback, data.data[0]]);
   }
 
+  // function deleteComment(key) {
+  //   let index = feedback.findIndex((object) => object.id === key);
+  //   setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
+  // }
   async function deleteFeedback(id) {
     // DELETE request using fetch with async/await
     const requestOptions = {
       method: "DELETE",
     };
-    const response = await fetch(
-      `https://orange-llamas.herokuapp.com/feedback/${id}`,
-      requestOptions
-    );
+    const response = await fetch(`${url}/feedback/${id}`, requestOptions);
     const data = await response.json();
+    console.log(data);
+    let index = feedback.findIndex((object) => object.id === id);
+    setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
   }
-  async function updateFeedback(object) {
+  async function updateFeedback(id, comment) {
     // POST request using fetch with async/await
     const requestOptions = {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(object),
+      body: JSON.stringify({ feedback: comment }),
     };
-    const response = await fetch(
-      `https://orange-llamas.herokuapp.com/feedback/${object.id}`,
-      requestOptions
-    );
+    const response = await fetch(`${url}/feedback/${id}`, requestOptions);
     const data = await response.json();
     let editedFeedback = data.data[0];
     let index = feedback.findIndex((object) => object.id === editedFeedback.id);
@@ -55,25 +55,12 @@ function Sidebar({ week }) {
 
   useEffect(() => {
     async function getFeedback() {
-      let response = await fetch(
-        `https://orange-llamas.herokuapp.com/feedback/`
-      );
+      let response = await fetch(`${url}/feedback`);
       let data = await response.json();
       setFeedback(data.data);
     }
     getFeedback();
   }, []);
-
-  function editComment(key, comment) {
-    let index = feedback.findIndex((object) => object.id === key);
-    feedback[index].feedback = comment;
-    setFeedback([...feedback]);
-  }
-
-  function deleteComment(key) {
-    let index = feedback.findIndex((object) => object.id === key);
-    setFeedback([...feedback.slice(0, index), ...feedback.slice(index + 1)]);
-  }
 
   let reverse = [...feedback].reverse();
 
@@ -101,8 +88,8 @@ function Sidebar({ week }) {
             <Feedback
               key={object.id}
               object={object}
-              editComment={editComment}
-              deleteComment={deleteComment}
+              updateFeedback={updateFeedback}
+              deleteFeedback={deleteFeedback}
             />
           );
         }

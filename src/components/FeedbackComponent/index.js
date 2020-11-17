@@ -1,7 +1,7 @@
 import "./main.css";
 import React, { useState } from "react";
 
-function Feedback({ object, editComment, deleteComment }) {
+function Feedback({ object, updateFeedback, deleteFeedback }) {
   const [editing, setEditing] = useState(false);
   const [text, setText] = useState(object.feedback);
   return (
@@ -16,7 +16,7 @@ function Feedback({ object, editComment, deleteComment }) {
           visibility={editing}
           onKeyPress={(e) => {
             if (e.key === "Enter") {
-              editComment(object.id, e.target.value);
+              updateFeedback(object.id, e.target.value);
               setEditing(false);
             }
           }}
@@ -35,7 +35,7 @@ function Feedback({ object, editComment, deleteComment }) {
       <button
         className="mentor-delete-button"
         onClick={() => {
-          deleteComment(object.id);
+          deleteFeedback(object.id);
         }}
       >
         delete
